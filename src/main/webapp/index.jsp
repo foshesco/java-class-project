@@ -4,12 +4,12 @@
 <head>
 <meta charset="UTF-8">
 <title>School Home</title>
-
-<form action="login">
+</head>
+<body>
+<form action="test">
 <input type="submit">
 </form>
-
-<link rel="stylesheet" href="css/style.css">
+<!-- <link rel="stylesheet" href="css/style.css">
 </head>
 <body>
 	<div class="container">
@@ -17,7 +17,7 @@
 		<div class="login-container">
 
 			<div class="login-box">
-				<!-- LOGIN -->
+				LOGIN
 				<div id="login-form">
 					<ul>
 						<li id="tab-login" class="tab-bot-border">Student Login</li>
@@ -33,7 +33,7 @@
 
 				</div>
 
-				<!-- REGISTER -->
+				REGISTER
 				<div id="register-form">
 
 					<ul>
@@ -45,19 +45,19 @@
 						<span>We recommend a valid work email</span>
 					</div>
 
-					<!-- FIRST NAME -->
+					FIRST NAME
 					<input type="text" id="register-firstname" name="firstname"
 						onblur="if (this.value == '') {this.value = 'firstname';}"
 						onfocus="if (this.value == 'firstname') {this.value = '';}"
 						value="firstname" />
 
-					<!-- LAST NAME -->
+					LAST NAME
 					<input type="text" id="register-lastname" name="lastname"
 						onblur="if (this.value == '') {this.value = 'lastname';}"
 						onfocus="if (this.value == 'lastname') {this.value = '';}"
 						value="lastname" />
 
-					<!-- PASSWORD -->
+					PASSWORD
 					<input type="password" id="register-password" name="password"
 						value="password">
 
@@ -73,23 +73,23 @@
 					<button type="button">login</button>
 
 				</div>
-				<!-- register-form -->
+				register-form
 
 				<div class="form-background"></div>
 
 			</div>
-			<!-- login-form -->
+			login-form
 
 		</div>
-		<!-- login-container -->
+		login-container
 
 	</div>
-	<!-- container -->
+	container
 	<script
 		src='http://cdnjs.cloudflare.com/ajax/libs/jquery/2.1.3/jquery.min.js'></script>
 
 	<script src="js/index.js"></script>
-
+ -->
 </body>
 
 </html>
