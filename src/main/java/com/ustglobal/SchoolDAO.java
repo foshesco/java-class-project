@@ -24,16 +24,28 @@ public class SchoolDAO {
 	@Value("${jdbc.password}")
 	String password;
 
-	public Connection connectMe() throws ClassNotFoundException, SQLException {
-		Class.forName(driver);
-		this.con = DriverManager.getConnection(url, username, password);
+	public Connection connectMe(){
+		try {
+			Class.forName(driver);
+		} catch (ClassNotFoundException e1) {
+			e1.printStackTrace();
+		}
+		try {
+			this.con = DriverManager.getConnection(url, username, password);
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+		if (con != null) {
+			System.out.println("Connected to the database...");
+			return con;
+		}
 		return con;
 	}
 	
 	public boolean createCourse(Courses c) {
+		connectMe();
 		String query = "insert into courses values(" + "'" + c.getCoursenumber() + "','" + c.getClasstitle() + "','"
 				+ c.getHours() + "','" + c.getDeptid() + "')";
-		
 		System.out.println(c.getCoursenumber());
 		System.out.println(c.getClasstitle()); 
 		System.out.println(c.getHours()); 
