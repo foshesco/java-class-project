@@ -28,6 +28,6 @@ public class StudentController {
 		if(i != null) {
 			SchoolDAO.addInstructor(i);
 		}
-		return "success2";
+		return "success23";
 	}
 }
