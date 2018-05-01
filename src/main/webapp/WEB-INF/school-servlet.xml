@@ -19,6 +19,6 @@
 		<property name="suffix" value=".jsp" />
 	</bean>
 
-	<bean id="daohelp" class="com.ustglobal.SchoolDAO" />
+	<!-- <bean id="daohelp" class="com.ustglobal.SchoolDAO" />  -->
 
 </beans>

@@ -1,19 +1,26 @@
 package com.ustglobal;
 
-import java.sql.Connection;
-import java.sql.DriverManager;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
-import java.sql.SQLException;
 
+import javax.sql.DataSource;
+
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
+import org.springframework.context.annotation.Bean;
+import org.springframework.context.annotation.ComponentScan;
+import org.springframework.context.annotation.Configuration;
+import org.springframework.context.annotation.PropertySource;
 import org.springframework.jdbc.core.JdbcTemplate;
+import org.springframework.jdbc.datasource.DriverManagerDataSource;
 
+@Configuration
+@ComponentScan("com.ustglobal")
+@PropertySource("classpath:db.properties")
 public class SchoolDAO {
 	private JdbcTemplate jdbcTemplate;
 	PreparedStatement ps;
 	ResultSet rs;
-	Connection con;
 	
 	@Value("${jdbc.driver}")
 	String driver;
@@ -24,46 +31,27 @@ public class SchoolDAO {
 	@Value("${jdbc.password}")
 	String password;
 
-	public Connection connectMe(){
-		try {
-			Class.forName(driver);
-		} catch (ClassNotFoundException e1) {
-			e1.printStackTrace();
-		}
-		try {
-			this.con = DriverManager.getConnection(url, username, password);
-		} catch (SQLException e) {
-			e.printStackTrace();
-		}
-		if (con != null) {
-			System.out.println("Connected to the database...");
-			return con;
-		}
-		return con;
+	@Bean
+	public DataSource mysqlDataSource() {
+		DriverManagerDataSource dataSource = new DriverManagerDataSource();
+		dataSource.setDriverClassName(driver);
+		dataSource.setUrl(url);
+		dataSource.setUsername(username);
+		dataSource.setPassword(password);
+		return dataSource;
 	}
 	
-	public boolean createCourse(Courses c) {
-		connectMe();
-		String query = "insert into courses values(" + "'" + c.getCoursenumber() + "','" + c.getClasstitle() + "','"
-				+ c.getHours() + "','" + c.getDeptid() + "')";
-		System.out.println(c.getCoursenumber());
-		System.out.println(c.getClasstitle()); 
-		System.out.println(c.getHours()); 
-		System.out.println(c.getDeptid());
-		return true;
+	@Autowired
+	public void setJdbcTemplate(DataSource dataSource) {
+		this.jdbcTemplate = new JdbcTemplate(dataSource);
 	}
 	
-	public boolean addInstructor(Instructor i) {
-		String query = "insert into instructors values(" + "'" + i.getFirstname() + "','" + i.getLastname() + "','" + i.getDeptid() +
-				"','" + i.getOffice() + "','" + i.getPhonenumber() + "','" + i.getEmail() + "')";
-		
-		System.out.println(i.getFirstname());
-		System.out.println(i.getLastname());
-		System.out.println(i.getDeptid());
-		System.out.println(i.getOffice());
-		System.out.println(i.getPhonenumber());
-		System.out.println(i.getEmail());
-		return true;
+	public int createCourse(Courses c) {
+		return jdbcTemplate.update("INSERT INTO courses VALUES(?, ?, ?, ?)", c.getCoursenumber(), c.getClasstitle(), c.getHours(), c.getDeptid());
+	}
+	
+	public int addInstructor(Instructor i) {
+		return jdbcTemplate.update("INSERT INTO instructors VALUES(?, ?, ?, ?, ?, ?)", i.getFirstname(), i.getLastname(), i.getDeptid(), i.getOffice(), i.getPhonenumber(), i.getEmail());
 	}
 
 //	public String addCourse() {
