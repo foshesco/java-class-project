@@ -54,19 +54,20 @@ public class SchoolDAO {
 		return jdbcTemplate.update("INSERT INTO instructors VALUES(?, ?, ?, ?, ?, ?)", i.getFirstname(), i.getLastname(), i.getDeptid(), i.getOffice(), i.getPhonenumber(), i.getEmail());
 	}
 
-//	public String addCourse() {
-//
-//	}
-//
-//	public String dropCourse() {
-//
-//	}
-//
-//	public String requestTranscript() {
-//
-//	}
-//
-//	public String payFee() {
-//
-//	}
+	public String addCourse() {
+		return null;
+
+	}
+
+	public String dropCourse() {
+		return null;
+	}
+
+	public String requestTranscript() {
+		return null;
+	}
+
+	public String payFee() {
+		return null;
+	}
 }
