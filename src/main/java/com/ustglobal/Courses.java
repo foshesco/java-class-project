@@ -7,6 +7,8 @@ public class Courses {
 	int hours;
 	String deptid;
 	
+	public Courses() {}
+	
 	public Courses(int coursenumber, String classtitle, int hours, String deptid) {
 		super();
 		this.coursenumber = coursenumber;

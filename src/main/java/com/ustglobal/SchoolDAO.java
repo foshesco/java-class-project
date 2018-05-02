@@ -1,7 +1,11 @@
 package com.ustglobal;
 
+import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
+import java.sql.SQLException;
+import java.util.ArrayList;
+import java.util.List;
 
 import javax.sql.DataSource;
 
@@ -12,7 +16,9 @@ import org.springframework.context.annotation.ComponentScan;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.PropertySource;
 import org.springframework.jdbc.core.JdbcTemplate;
+import org.springframework.jdbc.core.RowMapper;
 import org.springframework.jdbc.datasource.DriverManagerDataSource;
+
 
 @Configuration
 @ComponentScan("com.ustglobal")
@@ -48,6 +54,20 @@ public class SchoolDAO {
 	
 	public int createCourse(Courses c) {
 		return jdbcTemplate.update("INSERT INTO courses VALUES(?, ?, ?, ?)", c.getCoursenumber(), c.getClasstitle(), c.getHours(), c.getDeptid());
+	}
+	
+	public List<Courses> getCourse() throws SQLException {
+		ArrayList<Courses> courseList = new ArrayList<>();
+
+			while (rs.next()) {
+				Courses courses = new Courses();
+				courses.setCoursenumber(rs.getInt(1));
+				courses.setClasstitle(rs.getString(2));
+				courses.setHours(rs.getInt(3));
+				courses.setDeptid(rs.getString(4));
+				courseList.add(courses);
+			}
+		return courseList;
 	}
 	
 	public int addInstructor(Instructor i) {

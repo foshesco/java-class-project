@@ -15,43 +15,43 @@ public class StudentController {
 	@Autowired
 	SchoolDAO SchoolDAO;
 
-	@RequestMapping(value = "/addCourse", method = RequestMethod.GET)
-	public String addCourse(Courses c) {
-		if (c != null) {
-			SchoolDAO.addCourse(c);
-		}
-		return "addCourse";
-	}
-
-	@RequestMapping(value = "/dropCourse", method = RequestMethod.GET)
-	public String dropCourse(Courses c) {
-		if (c != null) {
-			SchoolDAO.dropCourse(c);
-		}
-		return "dropCourse";
-	}
-
-	@RequestMapping(value = "/requestTranscript", method = RequestMethod.GET)
-	public String requestTranscript(Courses c) {
-		if (c != null) {
-			SchoolDAO.requestTranscript(c);
-		}
-		return "requestTranscript";
-	}
-
-	@RequestMapping(value="/payFee", method=RequestMethod.GET)
-	public String payFee() {
-		if(? != null) {
-			SchoolDAO.payFee(?);
-		}
-		return "payFee";
-	}
-
-	@RequestMapping(value="/quit", method=RequestMethod.GET)
-	public String quit() {
-		if(? != null) {
-			SchoolDAO.payFee(?);
-		}
-		return "quit";
-	}
+//	@RequestMapping(value = "/addCourse", method = RequestMethod.GET)
+//	public String addCourse(Courses c) {
+//		if (c != null) {
+//			SchoolDAO.addCourse(c);
+//		}
+//		return "addCourse";
+//	}
+//
+//	@RequestMapping(value = "/dropCourse", method = RequestMethod.GET)
+//	public String dropCourse(Courses c) {
+//		if (c != null) {
+//			SchoolDAO.dropCourse(c);
+//		}
+//		return "dropCourse";
+//	}
+//
+//	@RequestMapping(value = "/requestTranscript", method = RequestMethod.GET)
+//	public String requestTranscript(Courses c) {
+//		if (c != null) {
+//			SchoolDAO.requestTranscript(c);
+//		}
+//		return "requestTranscript";
+//	}
+//
+//	@RequestMapping(value="/payFee", method=RequestMethod.GET)
+//	public String payFee() {
+//		if(? != null) {
+//			SchoolDAO.payFee(?);
+//		}
+//		return "payFee";
+//	}
+//
+//	@RequestMapping(value="/quit", method=RequestMethod.GET)
+//	public String quit() {
+//		if(? != null) {
+//			SchoolDAO.payFee(?);
+//		}
+//		return "quit";
+//	}
 }
