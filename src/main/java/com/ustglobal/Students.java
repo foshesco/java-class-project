@@ -7,6 +7,7 @@ public class Students {
 	String firstname;
 	String classname;
 	String phone;
+	String street;
 	String city;
 	String state;
 	int zip;
@@ -15,7 +16,9 @@ public class Students {
 	int hours;
 	double gpa;
 	
-	public Students(int sid, String lastname, String firstname, String classname, String phone, String city,
+	public Students() {}
+	
+	public Students(int sid, String lastname, String firstname, String classname, String phone, String street, String city,
 			String state, int zip, String degree, String deptid, int hours, double gpa) {
 		super();
 		this.sid = sid;
@@ -61,6 +64,14 @@ public class Students {
 	}
 	public void setPhone(String phone) {
 		this.phone = phone;
+	}
+	
+	public String getStreet() {
+		return street;
+	}
+	
+	public void setStreet(String streets) {
+		this.street = street;
 	}
 	public String getCity() {
 		return city;

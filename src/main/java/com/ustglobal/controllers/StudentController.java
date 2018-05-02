@@ -4,6 +4,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.servlet.ModelAndView;
 
 import com.ustglobal.Courses;
 import com.ustglobal.Instructor;
@@ -13,15 +14,16 @@ import com.ustglobal.SchoolDAO;
 public class StudentController {
 
 	@Autowired
-	SchoolDAO SchoolDAO;
+	SchoolDAO schoolDAO;
 
-//	@RequestMapping(value = "/addCourse", method = RequestMethod.GET)
-//	public String addCourse(Courses c) {
-//		if (c != null) {
-//			SchoolDAO.addCourse(c);
-//		}
-//		return "addCourse";
-//	}
+	@RequestMapping(value = "/addCourse", method = RequestMethod.GET)
+	public ModelAndView addCourse(String cno) {
+		schoolDAO.addCourse(Integer.parseInt(cno));
+		ModelAndView mav = new ModelAndView("successCourse");
+		mav.addObject("course", schoolDAO.addCourse(Integer.parseInt(cno)));
+		return mav;
+		}
+
 //
 //	@RequestMapping(value = "/dropCourse", method = RequestMethod.GET)
 //	public String dropCourse(Courses c) {
@@ -47,11 +49,8 @@ public class StudentController {
 //		return "payFee";
 //	}
 //
-//	@RequestMapping(value="/quit", method=RequestMethod.GET)
-//	public String quit() {
-//		if(? != null) {
-//			SchoolDAO.payFee(?);
-//		}
-//		return "quit";
-//	}
+	@RequestMapping(value="/quit", method=RequestMethod.GET)
+	public String quit() {
+		return "quit";
+	}
 }

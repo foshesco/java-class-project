@@ -27,13 +27,15 @@ public class AdminController {
 		if (c != null) {
 			SchoolDAO.createCourse(c);
 		}
-		return "course";
+		return "createCourse";
 	}
 
+	@RequestMapping(value = "/courseDirectory", method = RequestMethod.GET)
 	public ModelAndView handleRequest(HttpServletRequest arg0,
 			HttpServletResponse arg1) throws Exception { 
-		ModelAndView modelAndView = new ModelAndView("course");
-		modelAndView.addObject("courseList", SchoolDAO.getCourse());
+		ModelAndView modelAndView = new ModelAndView("courseList");
+		List<Courses> courseList = SchoolDAO.getCourses();
+		modelAndView.addObject("courseList", courseList);
 		return modelAndView;
 	}
 	
@@ -61,13 +63,15 @@ public class AdminController {
 //		return "schedule";
 //	}
 //
-//	@RequestMapping(value = "/addInstructor", method = RequestMethod.GET)
-//	public String addInstructor(Instructor i) {
-//		if (i != null) {
-//			SchoolDAO.addInstructor(i);
-//		}
-//		return "addInstructor";
-//	}
+	@RequestMapping(value = "/addInstructor", method = RequestMethod.GET)
+	public ModelAndView addInstructor(Instructor i) {
+		if (i != null) {
+			SchoolDAO.addInstructor(i);
+		}
+		ModelAndView modelAndView = new ModelAndView("addInstructor");
+		modelAndView.addObject("instructor", i);
+		return modelAndView;
+	}
 //
 //	@RequestMapping(value = "/dropInstructor", method = RequestMethod.GET)
 //	public String addInstructor(Instructor i) {

@@ -11,9 +11,10 @@
 <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
 <title>Course Directory</title>
 </head>
-<body>
+	<body>
 
 <h1> Course Directory </h1>
+
 		<table width="800" border="2.5">
 			<tr height="50">
 			
@@ -21,21 +22,19 @@
 				<th><b><font size="4">Course Title</font></b></th>
 				<th><b><font size="4">Hours</font></b></th>
 				<th><b><font size="4">Department ID</font></b></th>
-			</tr>
 		
-			<c:forEach items="${course}" var="course">
-				<tr>
-
-					<td>${course.coursenumber}</td>
-					<td>${course.classtitle}</td>
-					<td>${course.hours}</td>
-					<td>${course.deptid}</td>
+			<c:forEach items="${courseList}" var="course">
+				<tr>      
+					<td><c:out value="${course.coursenumber}" />
+       				<td><c:out value="${course.classtitle}" />        
+        			<td><c:out value="${course.hours}" />
+        			<td><c:out value="${course.deptid}" />
 
 				</tr>
 			</c:forEach>
 		</table>
 		<br><br><br>
-<a href="index">Add Course</a>
+<a href="index.jsp">Main Menu</a>
 
 </body>
 </html>
