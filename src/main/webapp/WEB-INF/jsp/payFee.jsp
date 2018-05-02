@@ -7,8 +7,9 @@
 <title>Insert title here</title>
 </head>
 <body>
-<h1>Successfully added:</h1>
-<br>
-${course.getClasstitle()}
+
+<h1>You owe: </h1>
+${payFee}
+
 </body>
 </html>

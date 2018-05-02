@@ -1,14 +1,11 @@
 package com.ustglobal;
 
-import java.sql.Connection;
 import java.sql.PreparedStatement;
-import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 
 import javax.sql.DataSource;
-import javax.sql.RowSet;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
@@ -17,7 +14,6 @@ import org.springframework.context.annotation.ComponentScan;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.PropertySource;
 import org.springframework.jdbc.core.JdbcTemplate;
-import org.springframework.jdbc.core.RowMapper;
 import org.springframework.jdbc.datasource.DriverManagerDataSource;
 import org.springframework.jdbc.support.rowset.SqlRowSet;
 
@@ -58,36 +54,59 @@ public class SchoolDAO {
 		return jdbcTemplate.update("INSERT INTO courses VALUES(?, ?, ?, ?)", c.getCoursenumber(), c.getClasstitle(), c.getHours(), c.getDeptid());
 	}
 	
-	public List<Courses> getCourses() throws SQLException {
-		ArrayList<Courses> courseList = new ArrayList<>();
-		rs = jdbcTemplate.queryForRowSet("SELECT * FROM courses");
-			while (rs.next()) {
-				Courses courses = new Courses();
-				courses.setCoursenumber(rs.getInt(1));
-				courses.setClasstitle(rs.getString(2));
-				courses.setHours(rs.getInt(3));
-				courses.setDeptid(rs.getString(4));
-				System.out.println(rs.getInt(1));
-				courseList.add(courses);
-			}
-		return courseList;
-	}
+//	public List<Courses> getCourses() throws SQLException {
+//		ArrayList<Courses> courseList = new ArrayList<>();
+//		rs = jdbcTemplate.queryForRowSet("SELECT * FROM courses");
+//			while (rs.next()) {
+//				Courses courses = new Courses();
+//				courses.setCoursenumber(rs.getInt(1));
+//				courses.setClasstitle(rs.getString(2));
+//				courses.setHours(rs.getInt(3));
+//				courses.setDeptid(rs.getString(4));
+//				System.out.println(rs.getInt(1));
+//				courseList.add(courses);
+//			}
+//		return courseList;
+//	}
 	
 	public int addInstructor(Instructor i) {
 		return jdbcTemplate.update("INSERT INTO instructors VALUES(?, ?, ?, ?, ?, ?)", i.getFirstname(), i.getLastname(), i.getDeptid(), i.getOffice(), i.getPhonenumber(), i.getEmail());
 	}
-
-
-	public String dropCourse() {
-		return null;
+	
+	public Courses dropCourse(int cno) {
+		// Update hours after dropping course
+		Students student = retrieveStudentClasses();
+		String dropCourseStr = null;
+		if (student.getClassname().charAt(0) != ',') {
+			dropCourseStr = student.getClassname().replaceAll(cno + ", ", "");
+		} else {
+			dropCourseStr = student.getClassname().replace(", " + cno, "");
+		}
+		System.out.println(dropCourseStr);
+		jdbcTemplate.update("UPDATE students SET class=? WHERE sid=?", dropCourseStr, 321);
+		return getCourse(cno);
 	}
 
-	public String requestTranscript() {
-		return null;
+	public void requestTranscript(int sid) {
+		ArrayList<Courses> transcriptList = new ArrayList<>();
+		SqlRowSet rs = jdbcTemplate.queryForRowSet("SELECT c.cno, s.sid FROM students s "
+				+ "INNER JOIN sections sec ON e.lineno = sec.lineno AND e.term = sec.term"
+				+ "INNER JOIN courses c ON sec.cno = c.cno"
+				+ "INNER JOIN enrollement e  ON s.sid = e.sid");
+//				+ "INNER JOIN departments d ON s.dept_id = d.dept_id "
+//				+ "INNER JOIN courses c ON d.dept_id = c.dept_id");
+		
+		return transcriptList;
 	}
 
-	public String payFee() {
-		return null;
+	public double payFee(int sid) {
+		int sum = 0;		
+		String[] courseList = retrieveStudentClasses().getClassname().split(", ");
+		for(String course : courseList) {
+			sum += getCourse(Integer.parseInt(course)).getHours();
+		}
+		double price = sum * 300;
+		return price;
 	}
 	
 	public Students retrieveStudentClasses() {

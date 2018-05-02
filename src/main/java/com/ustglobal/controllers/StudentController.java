@@ -19,20 +19,20 @@ public class StudentController {
 	@RequestMapping(value = "/addCourse", method = RequestMethod.GET)
 	public ModelAndView addCourse(String cno) {
 		schoolDAO.addCourse(Integer.parseInt(cno));
-		ModelAndView mav = new ModelAndView("successCourse");
-		mav.addObject("course", schoolDAO.addCourse(Integer.parseInt(cno)));
+		ModelAndView mav = new ModelAndView("addCourse");
+		mav.addObject("addCourse", schoolDAO.getCourse(Integer.parseInt(cno)));
 		return mav;
 		}
 
-//
-//	@RequestMapping(value = "/dropCourse", method = RequestMethod.GET)
-//	public String dropCourse(Courses c) {
-//		if (c != null) {
-//			SchoolDAO.dropCourse(c);
-//		}
-//		return "dropCourse";
-//	}
-//
+
+	@RequestMapping(value = "/dropCourse", method = RequestMethod.GET)
+	public ModelAndView dropCourse(String cno) {
+		schoolDAO.dropCourse(Integer.parseInt(cno)); 
+		ModelAndView mav = new ModelAndView("dropCourse");
+		mav.addObject("dropCourse", schoolDAO.getCourse(Integer.parseInt(cno)));
+		return mav;
+	}
+
 //	@RequestMapping(value = "/requestTranscript", method = RequestMethod.GET)
 //	public String requestTranscript(Courses c) {
 //		if (c != null) {
@@ -41,14 +41,14 @@ public class StudentController {
 //		return "requestTranscript";
 //	}
 //
-//	@RequestMapping(value="/payFee", method=RequestMethod.GET)
-//	public String payFee() {
-//		if(? != null) {
-//			SchoolDAO.payFee(?);
-//		}
-//		return "payFee";
-//	}
-//
+	@RequestMapping(value="/payFee", method=RequestMethod.GET)
+	public ModelAndView payFee(int sid) {
+		schoolDAO.payFee(sid);
+		ModelAndView mav = new ModelAndView("payFee");
+		mav.addObject("payFee", schoolDAO.payFee(sid));
+		return mav;
+	}
+
 	@RequestMapping(value="/quit", method=RequestMethod.GET)
 	public String quit() {
 		return "quit";

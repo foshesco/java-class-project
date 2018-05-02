@@ -30,14 +30,14 @@ public class AdminController {
 		return "createCourse";
 	}
 
-	@RequestMapping(value = "/courseDirectory", method = RequestMethod.GET)
-	public ModelAndView handleRequest(HttpServletRequest arg0,
-			HttpServletResponse arg1) throws Exception { 
-		ModelAndView modelAndView = new ModelAndView("courseList");
-		List<Courses> courseList = SchoolDAO.getCourses();
-		modelAndView.addObject("courseList", courseList);
-		return modelAndView;
-	}
+//	@RequestMapping(value = "/courseDirectory", method = RequestMethod.GET)
+//	public ModelAndView handleRequest(HttpServletRequest arg0,
+//			HttpServletResponse arg1) throws Exception { 
+//		ModelAndView modelAndView = new ModelAndView("courseList");
+//		List<Courses> courseList = SchoolDAO.getCourses();
+//		modelAndView.addObject("courseList", courseList);
+//		return modelAndView;
+//	}
 	
 //	@RequestMapping(value = "/dropCourse", method = RequestMethod.GET)
 //	public String dropCourse(Courses c) {

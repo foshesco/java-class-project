@@ -14,9 +14,27 @@ Add Course Number
 </form>
 
 <br><br>
+
+Drop Course Number
+<form action="dropCourse">
+<input type="text" name="cno">
+<input type="submit">
+</form>
+
+<br><br>
+
+Pay School Fees
+<form action="payFee">
+Enter SID: <input type="text" name="sid">
+<input type="submit">
+</form>
+
+<br><br>
+
 <form action="quit">
 <input type="submit" value="Log Off">
 </form>
+<br><br>
 <a href="index.jsp"><button>Main Menu</button></a>
 </body>
 </html>
