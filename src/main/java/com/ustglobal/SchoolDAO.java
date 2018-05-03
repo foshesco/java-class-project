@@ -88,7 +88,7 @@ public class SchoolDAO {
 	}
 
 	public void requestTranscript(int sid) {
-		ArrayList<Courses> transcriptList = new ArrayList<>();
+		ArrayList<Courses> transcriptList = new ArrayList<Courses>();
 		SqlRowSet rs = jdbcTemplate.queryForRowSet("SELECT c.cno, s.sid FROM students s "
 				+ "INNER JOIN sections sec ON e.lineno = sec.lineno AND e.term = sec.term"
 				+ "INNER JOIN courses c ON sec.cno = c.cno"
