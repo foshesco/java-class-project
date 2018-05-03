@@ -156,4 +156,5 @@ public class SchoolDAO {
 		jdbcTemplate.update("UPDATE students SET class=? WHERE sid=?", addCourseStr, sid);
 		updateHours(sid, getCourse(cno).getHours(), "add");
 		return getCourse(cno);
+	}
 }
