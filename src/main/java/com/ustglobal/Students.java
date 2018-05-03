@@ -70,7 +70,7 @@ public class Students {
 		return street;
 	}
 	
-	public void setStreet(String streets) {
+	public void setStreet(String street) {
 		this.street = street;
 	}
 	public String getCity() {

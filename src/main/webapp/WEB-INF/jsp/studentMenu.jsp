@@ -7,7 +7,7 @@
 <title>Insert title here</title>
 </head>
 <body>
-Student ID: ${sid}
+<h1>Welcome ${student.getFirstname()} ${student.getLastname()}</h1>
 <br>
 Add Course Number
 <form action="addCourse">

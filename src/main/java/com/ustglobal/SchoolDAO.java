@@ -75,33 +75,27 @@ public class SchoolDAO {
 	
 	public Courses dropCourse(int cno, int sid) {
 		// Update hours after dropping course
-		Students student = retrieveStudentClasses();
+		Students student = retrieveStudent(sid);
 		String dropCourseStr = null;
-		if (student.getClassname().charAt(0) != ',') {
+		if (Character.isDigit(student.getClassname().charAt(0))) {
 			dropCourseStr = student.getClassname().replaceAll(cno + ", ", "");
 		} else {
 			dropCourseStr = student.getClassname().replace(", " + cno, "");
 		}
 		System.out.println(dropCourseStr);
 		jdbcTemplate.update("UPDATE students SET class=? WHERE sid=?", dropCourseStr, sid);
+		updateHours(sid, getCourse(cno).getHours(), "subtract");
 		return getCourse(cno);
 	}
 
 	public void requestTranscript(int sid) {
 		ArrayList<Courses> transcriptList = new ArrayList<Courses>();
-		SqlRowSet rs = jdbcTemplate.queryForRowSet("SELECT c.cno, s.sid FROM students s "
-				+ "INNER JOIN sections sec ON e.lineno = sec.lineno AND e.term = sec.term"
-				+ "INNER JOIN courses c ON sec.cno = c.cno"
-				+ "INNER JOIN enrollement e  ON s.sid = e.sid");
-//				+ "INNER JOIN departments d ON s.dept_id = d.dept_id "
-//				+ "INNER JOIN courses c ON d.dept_id = c.dept_id");
-		
-//		return transcriptList;
+
 	}
 
 	public double payFee(int sid) {
 		int sum = 0;		
-		String[] courseList = retrieveStudentClasses().getClassname().split(", ");
+		String[] courseList = retrieveStudent(sid).getClassname().split(", ");
 		for(String course : courseList) {
 			sum += getCourse(Integer.parseInt(course)).getHours();
 		}
@@ -109,24 +103,24 @@ public class SchoolDAO {
 		return price;
 	}
 	
-	public Students retrieveStudentClasses() {
-		SqlRowSet rs = jdbcTemplate.queryForRowSet("SELECT * FROM students WHERE sid=?", 321);
+	public Students retrieveStudent(int sid) {
+		SqlRowSet rs = jdbcTemplate.queryForRowSet("SELECT * FROM students WHERE sid=?", sid);
 		String courses = null;
 		Students students = new Students();
 		while (rs.next()) {
-			students.setSid(rs.getInt(1));
-			students.setFirstname(rs.getString(2));
-			students.setLastname(rs.getString(3));
-			students.setClassname(rs.getString(4));
-			students.setPhone(rs.getString(5));
-			students.setStreet(rs.getString(6));
-			students.setCity(rs.getString(7));
-			students.setState(rs.getString(8));
-			students.setZip(rs.getInt(9));
-			students.setDegree(rs.getString(10));
-			students.setDeptid(rs.getString(11));
-			students.setHours(rs.getInt(12));
-			students.setGpa(rs.getDouble(13));
+			students.setSid(rs.getInt("sid"));
+			students.setFirstname(rs.getString("first_name"));
+			students.setLastname(rs.getString("last_name"));
+			students.setClassname(rs.getString("class"));
+			students.setPhone(rs.getString("phone"));
+			students.setStreet(rs.getString("street"));
+			students.setCity(rs.getString("city"));
+			students.setState(rs.getString("state"));
+			students.setZip(rs.getInt("zip"));
+			students.setDegree(rs.getString("degree"));
+			students.setDeptid(rs.getString("dept_id"));
+			students.setHours(rs.getInt("hours"));
+			students.setGpa(rs.getDouble("gpa"));
 		}
 		
 		return students;
@@ -144,11 +138,22 @@ public class SchoolDAO {
 		}
 		return course;
 	}
+	
+	public void updateHours(int sid, int hours, String operation) {
+		switch (operation) {
+        case "add" : jdbcTemplate.update("UPDATE students SET hours=? WHERE sid=?", retrieveStudent(sid).getHours() + hours, sid);
+                 break;
+        case "subtract" : jdbcTemplate.update("UPDATE students SET hours=? WHERE sid=?", retrieveStudent(sid).getHours() - hours, sid);
+                 break;
+        default:
+        	break;
+		}
+	}
 
 	public Courses addCourse(int cno, int sid) {
-		Students student = retrieveStudentClasses();
+		Students student = retrieveStudent(sid);
 		String addCourseStr = student.getClassname() +", " + cno;
 		jdbcTemplate.update("UPDATE students SET class=? WHERE sid=?", addCourseStr, sid);
+		updateHours(sid, getCourse(cno).getHours(), "add");
 		return getCourse(cno);
-	}
 }
