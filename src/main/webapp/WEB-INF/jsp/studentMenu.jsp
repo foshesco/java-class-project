@@ -7,6 +7,8 @@
 <title>Insert title here</title>
 </head>
 <body>
+Student ID: ${sid}
+<br>
 Add Course Number
 <form action="addCourse">
 <input type="text" name="cno">
