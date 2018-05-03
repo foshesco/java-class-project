@@ -10,8 +10,13 @@
 
 <a href=adminMenu.jsp><button>Admin Menu</button></a>
 <br><br>
-<a href=studentMenu.jsp><button>Student Menu</button></a>
-
+<form action="studentMenu" method="post">
+Enter Student ID:
+<br>
+<input type="text" name="sid">
+<br>
+<input type="submit" value="Go to Student Menu">
+</form>
 </body>
 </html>
 <!-- <link rel="stylesheet" href="css/style.css">
