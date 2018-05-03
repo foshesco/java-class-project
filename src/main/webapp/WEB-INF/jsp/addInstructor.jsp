@@ -8,7 +8,11 @@
 </head>
 <body>
 
-added instructor
+
+<br>
+<h3>Successfully Added ${instructor.toString()}</h3>
+<br><br>
+<a href="index.jsp">Main Menu</a>
 
 </body>
 </html>

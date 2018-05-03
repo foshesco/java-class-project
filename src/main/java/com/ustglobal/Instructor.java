@@ -2,6 +2,7 @@ package com.ustglobal;
 
 public class Instructor {
 
+	
 	String firstname;
 	String lastname;
 	String deptid;
@@ -55,4 +56,8 @@ public class Instructor {
 	public void setEmail(String email) {
 		this.email = email;
 	}	
+	@Override
+	public String toString() {
+		return (firstname + " "  + lastname);
+	}
 }

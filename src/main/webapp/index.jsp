@@ -8,28 +8,9 @@
 </head>
 <body>
 
-Create Course
-<form action="createCourse">
-Enter course number: <input type="text" name="coursenumber"><br>
-Enter course title: <input type="text" name="classtitle"><br>
-Enter hours: <input type="text" name="hours"><br>
-Enter dept id(varchar 6): <input type="text" name="deptid"><br>
-<input type="submit" value="Go">
-</form>
-
-<br><br><br>
-
-Add Instructor
-<form action="addInstructor">
-Enter last name: <input type="text" name="lastname"><br>
-Enter first name: <input type="text" name="firstname"><br>
-Enter dept id(varchar 6): <input type="text" name="deptid"><br>
-Enter office number(int 11): <input type="text" name="office"><br>
-Enter phone number(varchar 15): <input type="text" name="phonenumber"><br>
-Enter email(varchar 20): <input type="text" name="email"><br>
-<input type="submit" value="Go">
-</form>
-
+<a href=adminMenu.jsp><button>Admin Menu</button></a>
+<br><br>
+<a href=studentMenu.jsp><button>Student Menu</button></a>
 
 </body>
 </html>

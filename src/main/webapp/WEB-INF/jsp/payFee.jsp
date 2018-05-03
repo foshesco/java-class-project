@@ -8,7 +8,8 @@
 </head>
 <body>
 
-Added some stuff.
+<h1>You owe: </h1>
+${payFee}
 
 </body>
 </html>
