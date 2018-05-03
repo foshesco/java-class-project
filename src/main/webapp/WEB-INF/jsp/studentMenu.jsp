@@ -27,8 +27,7 @@ Drop Course Number
 
 Pay School Fees
 <form action="payFee">
-Enter SID: <input type="text" name="sid">
-<input type="submit">
+<input type="submit" name="${sid}" value="Pay Fee">
 </form>
 
 <br><br>

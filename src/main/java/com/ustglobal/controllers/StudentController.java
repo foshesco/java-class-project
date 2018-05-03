@@ -18,10 +18,11 @@ public class StudentController {
 
 	@Autowired
 	SchoolDAO schoolDAO;
+	int sid;
 
 	@RequestMapping(value = "/addCourse", method = RequestMethod.GET)
 	public ModelAndView addCourse(String cno) {
-		schoolDAO.addCourse(Integer.parseInt(cno));
+		schoolDAO.addCourse(Integer.parseInt(cno), sid);
 		ModelAndView mav = new ModelAndView("addCourse");
 		mav.addObject("addCourse", schoolDAO.getCourse(Integer.parseInt(cno)));
 		return mav;
@@ -30,7 +31,7 @@ public class StudentController {
 
 	@RequestMapping(value = "/dropCourse", method = RequestMethod.GET)
 	public ModelAndView dropCourse(String cno) {
-		schoolDAO.dropCourse(Integer.parseInt(cno)); 
+		schoolDAO.dropCourse(Integer.parseInt(cno), sid); 
 		ModelAndView mav = new ModelAndView("dropCourse");
 		mav.addObject("dropCourse", schoolDAO.getCourse(Integer.parseInt(cno)));
 		return mav;
@@ -45,10 +46,10 @@ public class StudentController {
 //	}
 //
 	@RequestMapping(value="/payFee", method=RequestMethod.GET)
-	public ModelAndView payFee(int sid) {
-		schoolDAO.payFee(sid);
+	public ModelAndView payFee() {
+		schoolDAO.payFee(this.sid);
 		ModelAndView mav = new ModelAndView("payFee");
-		mav.addObject("payFee", schoolDAO.payFee(sid));
+		mav.addObject("payFee", schoolDAO.payFee(this.sid));
 		return mav;
 	}
 
@@ -58,7 +59,8 @@ public class StudentController {
 	}
 	
 	@RequestMapping(value="/studentMenu", method=RequestMethod.POST)
-	public ModelAndView studentMenu(@RequestParam String sid) {
+		public ModelAndView studentMenu(@RequestParam String sid) {
+		this.sid = Integer.parseInt(sid);
 		ModelAndView mav = new ModelAndView();
 		mav.setViewName("studentMenu");
 		mav.addObject("sid", sid);

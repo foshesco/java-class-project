@@ -15,6 +15,8 @@
 <title>Insert title here</title>
 </head>
 
+
+
 <body>
 <div class="form-wrap">
 		<div class="tabs">
@@ -24,8 +26,8 @@
 
 		<div class="tabs-content">
 			<div id="student-tab-content" class="active">
-				<form class="student-login-form" action="studentMenuController" method="post">
-					<input type="text" class="input" id="user_login" autocomplete="off" placeholder="Student ID">
+				<form class="student-login-form" action="studentMenu" method="POST">
+					<input type="text" class="input" name="sid" autocomplete="off" placeholder="Student ID">
 					<input type="password" class="input" id="user_pass" autocomplete="off" placeholder="Password">
 					<input type="checkbox" class="checkbox" id="remember_me">
 					<label for="remember_me">Remember me</label>

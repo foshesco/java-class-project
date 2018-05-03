@@ -73,7 +73,7 @@ public class SchoolDAO {
 		return jdbcTemplate.update("INSERT INTO instructors VALUES(?, ?, ?, ?, ?, ?)", i.getFirstname(), i.getLastname(), i.getDeptid(), i.getOffice(), i.getPhonenumber(), i.getEmail());
 	}
 	
-	public Courses dropCourse(int cno) {
+	public Courses dropCourse(int cno, int sid) {
 		// Update hours after dropping course
 		Students student = retrieveStudentClasses();
 		String dropCourseStr = null;
@@ -83,7 +83,7 @@ public class SchoolDAO {
 			dropCourseStr = student.getClassname().replace(", " + cno, "");
 		}
 		System.out.println(dropCourseStr);
-		jdbcTemplate.update("UPDATE students SET class=? WHERE sid=?", dropCourseStr, 321);
+		jdbcTemplate.update("UPDATE students SET class=? WHERE sid=?", dropCourseStr, sid);
 		return getCourse(cno);
 	}
 
@@ -145,10 +145,10 @@ public class SchoolDAO {
 		return course;
 	}
 
-	public Courses addCourse(int cno) {
+	public Courses addCourse(int cno, int sid) {
 		Students student = retrieveStudentClasses();
 		String addCourseStr = student.getClassname() +", " + cno;
-		jdbcTemplate.update("UPDATE students SET class=? WHERE sid=?", addCourseStr, 321);
+		jdbcTemplate.update("UPDATE students SET class=? WHERE sid=?", addCourseStr, sid);
 		return getCourse(cno);
 	}
 }
