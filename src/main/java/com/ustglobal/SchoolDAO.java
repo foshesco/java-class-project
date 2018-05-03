@@ -96,7 +96,7 @@ public class SchoolDAO {
 //				+ "INNER JOIN departments d ON s.dept_id = d.dept_id "
 //				+ "INNER JOIN courses c ON d.dept_id = c.dept_id");
 		
-		return transcriptList;
+//		return transcriptList;
 	}
 
 	public double payFee(int sid) {
